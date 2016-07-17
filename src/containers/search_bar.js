@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchWeather } from '../actions/index';
 
-export default class SearchBar extends Component {
+class SearchBar extends Component {
   constructor(props) {
     super(props);
 
@@ -21,10 +24,15 @@ export default class SearchBar extends Component {
 
   onFormSubmit(event) {
     event.preventDefault();
+    const cityName = this.state.term;
 
     // We need to fetch weather data
-    // api.openweathermap.org/data/2.5/forecast?q={city name},{country code}
-    queryString = 'api.openweathermap.org/data/2.5/forecast?q=';
+    this.props.fetchWeather(cityName);
+
+    // Clear search input for ease-of-use for users
+    this.setState({
+      term: ''
+    });
   }
 
   onInputChange(event) {
@@ -54,3 +62,12 @@ export default class SearchBar extends Component {
     );
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchWeather }, dispatch);
+}
+
+// null for now because mapDispatchToProps ALWAYS goes in as the 2nd argument
+// and we don't have mapPropsToState setup yet
+// essentially, we don't need state here
+export default connect(null, mapDispatchToProps)(SearchBar)
