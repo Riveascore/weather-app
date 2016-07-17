@@ -8,6 +8,7 @@ export default function(state = [], action) {
   switch (action.type) {
     case FETCH_WEATHER:
       // same as state.concat(action.payload.data)
+      console.log('Data: ', action.payload.data);
       return [ action.payload.data, ...state ];
   }
   return state;
