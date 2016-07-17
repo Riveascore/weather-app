@@ -1,0 +1,2 @@
+const API_KEY = '6a78596d062df78380eff5944c4e5567';
+// const API_KEY = '30b5696a95c842e52bfc491cd185b300';

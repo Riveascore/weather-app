@@ -16,6 +16,15 @@ export default class SearchBar extends Component {
     // THEN, replace the funciton definition with the same function definition
     // that now has the correct "this" context
     this.onInputChange = this.onInputChange.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+  }
+
+  onFormSubmit(event) {
+    event.preventDefault();
+
+    // We need to fetch weather data
+    // api.openweathermap.org/data/2.5/forecast?q={city name},{country code}
+    queryString = 'api.openweathermap.org/data/2.5/forecast?q=';
   }
 
   onInputChange(event) {
@@ -26,7 +35,10 @@ export default class SearchBar extends Component {
 
   render() {
     return (
-      <form className="input-group">
+      <form
+        className="input-group"
+        onSubmit={this.onFormSubmit}
+      >
         <input
           placeholder="Get a 5 day forcast in your favorite cities"
           className="form-control"
@@ -35,7 +47,7 @@ export default class SearchBar extends Component {
         />
         <span className="input-group-btn">
           <button type="submit" className="btn btn-secondary">
-            Search
+            Find City
           </button>
         </span>
       </form>
